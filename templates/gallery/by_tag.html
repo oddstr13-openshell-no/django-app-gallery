@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load thumbnail %}
+{% load taggit_extras %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/static/gallery/gallery.css" />
+{% endblock %}
+
+{% block content %}
+    {% get_tagcloud as tags for images %}
+    <ul class="tagcloud">
+{% for tag in tags %}<li class="item s{{tag.weight|floatformat:0}}"><a href="{% url 'gallery.views.by_tag' tag %}">{{tag}}</a></li>{% endfor %}
+    </ul>
+
+    {% for image in images %}
+    <div class="galleryitem">
+        {% thumbnail image.image "194x120" as im %}
+        <a href="{% url 'gallery.views.image' image.id %}" title="{{ image.title }}"><img style="padding:{{ im|margin:'194x120' }}" src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}" alt="{{ image.title }}" /></a>
+        {% endthumbnail %}
+    </div>
+    {% endfor %}
+    <div class="clear"></div>
+{% endblock %}

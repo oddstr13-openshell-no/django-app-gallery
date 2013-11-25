@@ -1,0 +1,21 @@
+.galleryitem {
+    list-style-type: none;
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+}
+
+.galleryitem img {
+    background: #333;
+}
+
+.galleryimage {
+    width: 100%;
+    text-align: center;
+}
+
+.clear {
+    clear: both;
+    width: 0px;
+    height: 0px;
+}
