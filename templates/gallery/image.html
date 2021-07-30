@@ -3,8 +3,19 @@
 {% load thumbnail %}
 {% load taggit_extras %}
 
+{% block title %}{{ image.title }} :: Gallery :: {% endblock %}
+
 {% block head %}
     <link rel="stylesheet" type="text/css" href="/static/gallery/gallery.css" />
+    {% thumbnail image.image "780x482" as im %}
+    <link rel="image_src" href="{{ im.url }}" />
+    <meta property="og:title" content="{{ image.title }}" />
+    <meta property="og:image" content="https://oddstr13.openshell.no{{ im.url }}" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://oddstr13.openshell.no{% url 'gallery.views.image' image.id %}"/>
+    <meta property="og:site_name" content="Odd's website"/>
+    <meta property="og:description" content="{{ image.description }}"/>
+    {% endthumbnail %}
 {% endblock %}
 
 {% block content-class %}{% endblock %}

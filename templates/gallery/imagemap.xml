@@ -1,0 +1,27 @@
+{% load thumbnail %}{% load taggit_extras %}<?xml version="1.0" encoding="UTF-8"?>
+
+<tineye-list
+   creation-date="{% now "c" %}"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+   xs:noNamespaceSchemaLocation="http://www.tineye.com/contributing/imagemap.xsd">
+   {% for image in images %}
+   {% thumbnail image.image "780x482" as im %}
+   {% get_taglist as tags for image.listwrapped %}
+   <image>
+      <id>image_{{ image.id }}</id>
+      <page-url>{{ SITE_URL }}{% url 'gallery.views.image' image.id %}</page-url>
+      <image-url>{{ SITE_URL }}{{ im.url }}</image-url>
+      <author-info>
+         <author-id>{{ image.photograph.username }}</author-id>
+         <author-name>{{ image.photograph }}</author-name>
+      </author-info>
+      <metadata>
+         <width>{{ image.image.width }}</width>
+         <height>{{ image.image.height }}</height>
+         <file-size>{{ image.image.size }}</file-size>
+      </metadata>
+      <keywords lang='en'>{% for tag in tags %}{{ tag }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}</keywords>
+   </image>
+   {% endthumbnail %}
+   {% endfor %}
+</tineye-list>
