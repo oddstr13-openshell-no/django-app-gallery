@@ -17,7 +17,7 @@ class Paste(models.Model):
     time    = models.DateTimeField(auto_now_add=True)
     replyto = models.ForeignKey("self", on_delete=models.SET_NULL, blank=True, null=True, related_name="replies") #, related_query_name="reply") # related_query_name requires 1.6
 
-    def __unicode__(self):
+    def __str__(self):
         return self.urlid
         
     def save(self):
@@ -72,7 +72,7 @@ class Image(models.Model):
         
         super(Image, self).save()
     
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def listwrapped(self):
@@ -83,7 +83,7 @@ class Photograph(models.Model): # FIXIT
     name        = models.CharField(max_length=64, blank=True)
     displayname = models.CharField(max_length=32, blank=True)
     
-    def __unicode__(self):
+    def __str__(self):
         return self.displayname or self.name
 
 
@@ -92,7 +92,7 @@ class Camera(models.Model):
     url         = models.URLField(blank=True, null=True)
     description = models.TextField(blank=True, default="")
     
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -102,6 +102,6 @@ class Lens(models.Model):
     description = models.TextField()
     camera      = models.ForeignKey("Camera", on_delete=models.SET_NULL, blank=True, null=True, related_name="lenses")
     
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 

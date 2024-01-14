@@ -5,8 +5,8 @@ from django.core.management.base import BaseCommand, CommandError
 
 from gallery.models import Image
 
-ROW_SEP = unicode(chr(30))
-COL_SEP = unicode(chr(31))
+ROW_SEP = chr(30)
+COL_SEP = chr(31)
 
 """
 class Image(models.Model):
@@ -49,7 +49,7 @@ class Command(BaseCommand):
                 fn = os.path.basename(im.image.path)
                 self.stdout.write(u'{0}\n'.format(fn))
                 fh.write(COL_SEP.join([
-                    unicode(im.id),
+                    str(im.id),
                     fn,
                     im.title,
                     im.description,
