@@ -12,7 +12,7 @@
     <meta property="og:title" content="{{ image.title }}" />
     <meta property="og:image" content="https://oddstr13.openshell.no{{ im.url }}" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:url" content="https://oddstr13.openshell.no{% url 'gallery.views.image' image.id %}"/>
+    <meta property="og:url" content="https://oddstr13.openshell.no{% url 'gallery-image' image.id %}"/>
     <meta property="og:site_name" content="Odd's website"/>
     <meta property="og:description" content="{{ image.description }}"/>
     {% endthumbnail %}
@@ -27,7 +27,7 @@
         <a href="{{ image.image.url }}" title="Click for full size"><img style="padding:{{ im|margin:'780x482' }}" src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}" alt="{{ image.title }}" /></a>
         {% endthumbnail %}
         <ul class="taglist">
-            {#% for tag in tags %}<li class="item"><a href="{% url 'gallery.views.by_tag' tag %}">{{tag}}</a></li>{% endfor %#}
+            {#% for tag in tags %}<li class="item"><a href="{% url 'gallery-by-tag' tag %}">{{tag}}</a></li>{% endfor %#}
         </ul>
         
         <code>Taken by {{ image.photograph }}, {{ image.taken }} using {{ image.camera }}</code>

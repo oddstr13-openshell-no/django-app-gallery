@@ -9,7 +9,7 @@
    {#% get_taglist as tags for image.listwrapped %#}
    <image>
       <id>image_{{ image.id }}</id>
-      <page-url>{{ SITE_URL }}{% url 'gallery.views.image' image.id %}</page-url>
+      <page-url>{{ SITE_URL }}{% url 'gallery-image' image.id %}</page-url>
       <image-url>{{ SITE_URL }}{{ im.url }}</image-url>
       <author-info>
          <author-id>{{ image.photograph.username }}</author-id>
