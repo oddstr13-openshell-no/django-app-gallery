@@ -1,9 +1,11 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import url
 
-urlpatterns = patterns('gallery.views',
-    url(r'^$',                  'index'),
-    url(r'^imagemap.xml$',      'imagemap'),
-    url(r'^image/(?P<id>.+)/$', 'image'),
-    url(r'^tag/(?P<tag>.+)/$',  'by_tag'),
-    url(r'^(?P<id>([0-9]|[1-5][0-9]|6[0-3]))$', 'image_old_redirect'),
-)
+from . import views
+
+urlpatterns = [
+    url(r'^$',                  views.index),
+    url(r'^imagemap.xml$',      views.imagemap),
+    url(r'^image/(?P<id>.+)/$', views.image),
+    url(r'^tag/(?P<tag>.+)/$',  views.by_tag),
+    url(r'^(?P<id>([0-9]|[1-5][0-9]|6[0-3]))$', views.image_old_redirect),
+]
