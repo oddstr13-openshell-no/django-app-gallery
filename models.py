@@ -1,31 +1,13 @@
 from django.db import models
+from django.utils import timezone
 
 from taggit.managers import TaggableManager
 from PIL import Image as PILImage
-import datetime
 
 from gallery.lib import get_exif, decode_exif_datetime
 
 from sorl.thumbnail import ImageField
-'''
-class Paste(models.Model):
-    urlid   = models.CharField(max_length=16, unique=True)
-    ip      = models.GenericIPAddressField()
-    text    = models.TextField()
-    lang    = models.ForeignKey("Lang", on_delete=models.PROTECT)
-    private = models.BooleanField(default=False)  # Hide paste from public listing
-    time    = models.DateTimeField(auto_now_add=True)
-    replyto = models.ForeignKey("self", on_delete=models.SET_NULL, blank=True, null=True, related_name="replies") #, related_query_name="reply") # related_query_name requires 1.6
 
-    def __str__(self):
-        return self.urlid
-        
-    def save(self):
-        if not self.id:
-            self.created = datetime.date.today()
-        self.updated = datetime.datetime.today()
-        super(TodoList, self).save()
-'''
 
 class Image(models.Model):
     image       = ImageField(upload_to="gallery/%Y/%m/%d")
@@ -67,7 +49,7 @@ class Image(models.Model):
         except: pass # No EXIF :/
         
         if self.published is None:
-            self.published = datetime.datetime.now()
+            self.published = timezone.now()
 
         
         super(Image, self).save()
