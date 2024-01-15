@@ -37,31 +37,36 @@ class Lens(models.Model):
 
 """
 
+
 class Command(BaseCommand):
-    help = 'Dumps image metadata'
+    help = "Dumps image metadata"
 
     def add_arguments(self, parser):
-        parser.add_argument('poll_id', nargs='+', type=int)
+        parser.add_argument("poll_id", nargs="+", type=int)
 
     def handle(self, *args, **options):
-        with open('imagedump.table', 'wt') as fh:
+        with open("imagedump.table", "wt") as fh:
             for im in Image.objects.all():
                 fn = os.path.basename(im.image.path)
-                self.stdout.write(u'{0}\n'.format(fn))
-                fh.write(COL_SEP.join([
-                    str(im.id),
-                    fn,
-                    im.title,
-                    im.description,
-                    im.published.isoformat(' ') if im.published else '',
-                    im.taken.isoformat(' ') if im.taken else '',
-                    ','.join(im.tags.names()),
-                    im.photograph.name,
-                    im.camera.name if im.camera else ''
-                ]).encode('utf-8'))
+                self.stdout.write("{0}\n".format(fn))
+                fh.write(
+                    COL_SEP.join(
+                        [
+                            str(im.id),
+                            fn,
+                            im.title,
+                            im.description,
+                            im.published.isoformat(" ") if im.published else "",
+                            im.taken.isoformat(" ") if im.taken else "",
+                            ",".join(im.tags.names()),
+                            im.photograph.name,
+                            im.camera.name if im.camera else "",
+                        ]
+                    ).encode("utf-8")
+                )
                 fh.write(ROW_SEP)
 
-        #for poll_id in options['poll_id']:
+        # for poll_id in options['poll_id']:
         #    try:
         #        poll = Poll.objects.get(pk=poll_id)
         #    except Poll.DoesNotExist:
