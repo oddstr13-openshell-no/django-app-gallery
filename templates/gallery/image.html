@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% load thumbnail %}
-{#% load taggit_extras %#}
+{% load taggit_extras %}
 
 {% block title %}{{ image.title }} :: Gallery :: {% endblock %}
 
@@ -20,14 +20,14 @@
 
 {% block content-class %}{% endblock %}
 {% block content %}
-    {#% get_taglist as tags for limage %#}
+    {% get_taglist as tags for limage %}
     <div class="galleryitem galleryimage">
         <h1>{{image.title}}</h1>
         {% thumbnail image.image "780x482" as im %}
         <a href="{{ image.image.url }}" title="Click for full size"><img style="padding:{{ im|margin:'780x482' }}" src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}" alt="{{ image.title }}" /></a>
         {% endthumbnail %}
         <ul class="taglist">
-            {#% for tag in tags %}<li class="item"><a href="{% url 'gallery-by-tag' tag %}">{{tag}}</a></li>{% endfor %#}
+            {% for tag in tags %}<li class="item"><a href="{% url 'gallery-by-tag' tag %}">{{tag}}</a></li>{% endfor %}
         </ul>
         
         <code>Taken by {{ image.photograph }}, {{ image.taken }} using {{ image.camera }}</code>

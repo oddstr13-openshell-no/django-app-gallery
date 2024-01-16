@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% load thumbnail %}
-{#% load taggit_extras %#}
+{% load taggit_extras %}
 
 {% block title %}Gallery :: {% endblock %}
 
@@ -10,9 +10,9 @@
 {% endblock %}
 
 {% block content %}
-    {#% get_tagcloud as tags for 'gallery.Image' %#}
+    {% get_tagcloud as tags for 'gallery.Image' %}
     <ul class="tagcloud">
-{#% for tag in tags %}<li class="item s{{tag.weight|floatformat:0}}"><a href="{% url 'gallery-by-tag' tag %}">{{tag}}</a></li>{% endfor %#}
+{% for tag in tags %}<li class="item s{{tag.weight|floatformat:0}}"><a href="{% url 'gallery-by-tag' tag %}">{{tag}}</a></li>{% endfor %}
     </ul>
 
     {% for image in images %}
